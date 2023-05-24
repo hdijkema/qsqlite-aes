@@ -1,0 +1,16 @@
+Over naar een nieuwe versie van SQLITE
+
+1. Zet de bestanden sqlite-amalgamation-<versie>.zip over naar de qsqlite-aes directory.
+2. Pas sqlite.c aan.
+   a. bovenin: #define SQLITE_HAS_CODEC 1
+	 b. onderop: #include "codecext.c"
+3. Pas voor MacOS X / Linux de .pro file aan, pas de versies aan in de regels met extra defines
+
+en maak de nieuwe plugin
+
+2021-01-18
+* Versie 3.31.1 is de laatste release met SQLITE_HAS_CODEC.
+* Deze is van 2020-01-27. Deze versie ondersteunt gelukkig de 'AND' operator met FTS5,
+  maar we kunnen nu niet meer volgende versies van SQLite met encryptie.
+  Er zal dus een keer iets moeten gebeuren.
+* d.d. 2021-01-18 is de huidige versie 3.37.1.
