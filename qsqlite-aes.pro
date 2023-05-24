@@ -1,3 +1,7 @@
+###################################################################
+# This version works until Qt 6.4.3.
+# From Qt 6.5 on, we need to use CMake.
+###################################################################
 
 TARGET = qsqlite-aes_"$$QT_MAJOR_VERSION"_"$$QT_MINOR_VERSION"_"$$QT_PATCH_VERSION"
 message($$TARGET)
@@ -58,7 +62,10 @@ linux: QMAKE_CFLAGS += -DSQLITE_HAVE_ZLIB  -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_
 linux:LIBS += -ldl
 
 DISTFILES += \
+    .qmake.conf \
+    LICENSE \
     README \
+    README.md \
     sqlite-aes_5_12_3.json \
     sqlite-aes_5_12_5.json \
     sqlite-aes_5_13_1.json \
