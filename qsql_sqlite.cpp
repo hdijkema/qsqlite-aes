@@ -1127,7 +1127,9 @@ QT_END_NAMESPACE
 # include <unistd.h>
 #endif
 
-#include <sqlite3.h>
+extern "C" {
+#include "sqlite3.h"
+}
 #include <functional>
 
 Q_DECLARE_OPAQUE_POINTER(sqlite3*)
