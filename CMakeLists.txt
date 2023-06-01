@@ -1,7 +1,18 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(QSQLiteAES_VERSION "6.5.1")
-set(PROJECT_VERSION "2.0alpha")
+#set(QSQLiteAES_VERSION "6.5.1")
+#set(PROJECT_VERSION "2.0.0alpha")
+#set(PROJECT_VERSION_MAJOR "2")
+#set(PROJECT_VERSION_MINOR "0")
+#set(PROJECT_VERSION_PATCH "0alpha")
+
+set(PROJECT_VERSION "6.5.1")
+set(SQLiteAES_VERSION ${PROJECT_VERSION})
+set(PROJECT_VERSION_MAJOR "6")
+set(PROJECT_VERSION_MINOR "5")
+set(PROJECT_VERSION_PATCH "1")
+
+message(PROJECT_VERSION=${PROJECT_VERSION})
 
 project(qsqlite-aes2 LANGUAGES C CXX)
 project(QSQLiteAES2DriverPlugins
@@ -22,7 +33,54 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 ${PROJECT_VERSION} CONFIG REQUIRED COMPONENTS BuildInternals Core Sql)
 
 qt_prepare_standalone_project()
-#qt_internal_upgrade_cmake_policies()
+qt_internal_upgrade_cmake_policies()
+
+qt_internal_add_plugin(QSQLiteAES2Plugin
+    OUTPUT_NAME qsqlite-aes_${PROJECT_VERSION_MAJOR}_${PROJECT_VERSION_MINOR}_${PROJECT_VERSION_PATCH}
+    PLUGIN_TYPE sqldrivers
+    #OUTPUT_DIRECTORY c:/devel/plugins
+    #INSTALL_DIRECTORY sqlite-aes
+    SOURCES
+      qsqliteaes.cpp
+      qsqliteaes.h
+      codec.cpp
+      codec.h
+      codec_c_interface.h
+      codecext.c
+      qsql_sqlite.cpp
+      qsql_sqlite_p.h
+      qtv.h
+      shell.c
+      sqlite3.c
+      sqlite3.h
+      sqlite3ext.h
+      AES.cpp
+      AES.h
+      qsqlite-aes2_5_15_2.json
+      qsqlite-aes2_6_5_1.json
+    DEFINES
+        QT_NO_CAST_FROM_ASCII
+        QT_NO_CAST_TO_ASCII
+        SQLITE_ENABLE_COLUMN_METADATA
+        SQLITE_ENABLE_FTS5
+    LIBRARIES
+        Qt::Core
+        Qt::CorePrivate
+        Qt::SqlPrivate
+)
+
+#### Keys ignored in scope 1:.:.:sqlite.pro:<TRUE>:
+# OTHER_FILES = "sqlite.json"
+# QT_FOR_CONFIG = "sqldrivers-private"
+
+## Scopes:
+#####################################################################
+
+#qt_internal_extend_target(QSQLiteAES2Plugin
+#    LIBRARIES
+#        SQLite::SQLiteAES
+#)
+
 
 #qt_feature_module_begin(
 #    NO_MODULE
@@ -55,50 +113,7 @@ qt_prepare_standalone_project()
 #  qsqlite-aes2_6_5_1.json
 #)
 
-#target_link_libraries(qsqlite-aes2 PRIVATE Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::SqlPrivate Qt${QT_VERSION_MAJOR}::SqlDriver)
+#target_link_libraries(qsqlite-aes2 PRIVATE Qt${QT_VERSION_MAJOR}::Sql Qt${QT_VERSION_MAJOR}::SqlPrivate Qt${QT_VERSION_MAJOR}::CorePrivate)
 #target_compile_definitions(qsqlite-aes2 PRIVATE QSQLITEAES2_LIBRARY)
 
-qt_internal_add_plugin(QSQLiteAES2Plugin
-    #OUTPUT_NAME qsqlite-aes
-    PLUGIN_TYPE sqldrivers
-    #OUTPUT_DIRECTORY c:/devel/plugins
-    #INSTALL_DIRECTORY sqlite-aes
-    SOURCES
-      qsqliteaes.cpp
-      qsqliteaes.h
-      codec.cpp
-      codec.h
-      codec_c_interface.h
-      codecext.c
-      qsql_sqlite.cpp
-      qsql_sqlite_p.h
-      qtv.h
-      shell.c
-      sqlite3.c
-      sqlite3.h
-      sqlite3ext.h
-      AES.cpp
-      AES.h
-      qsqlite-aes2_5_15_2.json
-      qsqlite-aes2_6_5_1.json
-    DEFINES
-        QT_NO_CAST_FROM_ASCII
-        QT_NO_CAST_TO_ASCII
-    LIBRARIES
-        Qt::Core
-        Qt::CorePrivate
-        Qt::SqlPrivate
-)
-
-#### Keys ignored in scope 1:.:.:sqlite.pro:<TRUE>:
-# OTHER_FILES = "sqlite.json"
-# QT_FOR_CONFIG = "sqldrivers-private"
-
-## Scopes:
-#####################################################################
-
-#qt_internal_extend_target(QSQLiteAES2Plugin
-#    LIBRARIES
-#        SQLite::SQLiteAES
-#)
 

@@ -6,12 +6,12 @@
 #include <qstringlist.h>
 #include "qsql_sqlite_p.h"
 
-QSQLiteAES::QSQLiteAES(QObject *parent)
+QSQLiteAESPlugin::QSQLiteAESPlugin(QObject *parent)
     : QSqlDriverPlugin(parent)
 {
 }
 
-QSqlDriver *QSQLiteAES::create(const QString &name)
+QSqlDriver *QSQLiteAESPlugin::create(const QString &name)
 {
     QString qt_version(QLatin1String(QT_VERSION_STR));
     QString myname(QLatin1String("QSQLiteAES_%1"));

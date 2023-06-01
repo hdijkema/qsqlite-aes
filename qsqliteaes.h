@@ -3,7 +3,7 @@
 
 #include <QSqlDriverPlugin>
 
-class QSQLiteAES : public QSqlDriverPlugin
+class QSQLiteAESPlugin : public QSqlDriverPlugin
 {
     Q_OBJECT
 #if (QT_VERSION == QT_VERSION_CHECK(5, 15, 2))
@@ -17,7 +17,7 @@ class QSQLiteAES : public QSqlDriverPlugin
 #endif
 
 public:
-    explicit QSQLiteAES(QObject *parent = nullptr);
+    explicit QSQLiteAESPlugin(QObject *parent = nullptr);
 
 private:
     QSqlDriver *create(const QString &key) override;
