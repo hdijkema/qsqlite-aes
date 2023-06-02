@@ -329,8 +329,8 @@ bool CheckRcon(bool create)
 	if (create == true)
 		Rcon[0] = 0;
 	else if (Rcon[0] != 0)
-		return false; // todo - this is unused still check?
-	for (int i = 1; i < sizeof(Rcon)/sizeof(Rcon[0])-1; i++)
+        return false; // todo - this is unused still check?
+    for (int i = 1; i < static_cast<int>(sizeof(Rcon)/sizeof(Rcon[0])-1); i++)
 		{
 		if (create == true)
 			Rcon[i] = Ri;
@@ -609,6 +609,7 @@ bool CreateAESTables(bool create, bool create_file)
 	return retval;
 	} // CreateAESTables
 
+    /*
 void DumpHex(const aes_byte_t * table, int length)
 	{ // dump some hex values for debugging
 	int pos;
@@ -623,7 +624,7 @@ void DumpHex(const aes_byte_t * table, int length)
 		}
 	cerr << dec;
 	} // DumpHex
-
+*/
 
 }// end of anonymous namespace
 
